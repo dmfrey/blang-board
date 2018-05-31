@@ -2,34 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="27597216-7086-4e91-bfac-21274260ee55" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/application/application_main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/application/application_test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/blang-board_main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/blang-board_test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/domain/domain_main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/domain/domain_test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/persistence/persistence_main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/persistence/persistence_test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/presentation/presentation_main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/presentation/presentation_test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/src/main/kotlin/io/pivotal/apptx/blangBoard/Application.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/src/main/resources/bootstrap.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/src/test/kotlin/io/pivotal/apptx/blangBoard/ApplicationTests.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/domain/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/persistence/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/presentation/build.gradle" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -115,8 +89,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="52" column="6" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
+            <state relative-caret-position="338">
+              <caret line="56" column="5" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -1573,6 +1547,11 @@
             <path>
               <item name="blang-board" type="b2602c69:ProjectViewProjectNode" />
               <item name="blang-board" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name=".idea" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="blang-board" type="b2602c69:ProjectViewProjectNode" />
+              <item name="blang-board" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="application" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
             <path>
@@ -2008,8 +1987,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="52" column="6" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
+        <state relative-caret-position="338">
+          <caret line="56" column="5" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
         </state>
       </provider>
     </entry>
