@@ -1,0 +1,6 @@
+rootProject.name = 'blang-board'
+include 'application'
+include 'domain'
+include 'presentation'
+include 'persistence'
+
