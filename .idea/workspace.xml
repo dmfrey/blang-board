@@ -19,7 +19,6 @@
       <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/application/build.gradle" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/application/src/main/kotlin/io/pivotal/apptx/blangBoard/Application.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/application/src/main/kotlin/io/pivotal/apptx/blangBoard/usecases/UseCase.kt" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/application/src/main/resources/application.yml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/application/src/main/resources/bootstrap.yml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/application/src/test/kotlin/io/pivotal/apptx/blangBoard/ApplicationTests.kt" afterDir="false" />
@@ -113,11 +112,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UseCase.kt" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/src/main/kotlin/io/pivotal/apptx/blangBoard/usecases/UseCase.kt">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+            <state relative-caret-position="351">
+              <caret line="52" column="6" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -1538,7 +1537,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/presentation/build.gradle" />
         <option value="$PROJECT_DIR$/persistence/build.gradle" />
         <option value="$PROJECT_DIR$/domain/build.gradle" />
@@ -1549,6 +1547,7 @@
         <option value="$PROJECT_DIR$/application/src/test/kotlin/io/pivotal/apptx/blangBoard/ApplicationTests.kt" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/application/src/main/kotlin/io/pivotal/apptx/blangBoard/usecases/UseCase.kt" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -1605,16 +1604,6 @@
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="kotlin" type="462c0819:PsiDirectoryNode" />
               <item name="blangBoard" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="blang-board" type="b2602c69:ProjectViewProjectNode" />
-              <item name="blang-board" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="application" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
-              <item name="blangBoard" type="462c0819:PsiDirectoryNode" />
-              <item name="usecases" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="blang-board" type="b2602c69:ProjectViewProjectNode" />
@@ -1883,7 +1872,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="1057" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -1894,11 +1882,11 @@
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32916668" />
-      <window_info anchor="bottom" id="Version Control" visible="true" weight="0.32916668" />
-      <window_info anchor="bottom" id="Terminal" weight="0.32916668" />
+      <window_info anchor="bottom" id="Version Control" weight="0.32916668" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.32916668" />
       <window_info id="Capture Tool" />
       <window_info id="Designer" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24973376" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24973376" />
       <window_info anchor="bottom" id="Build" weight="0.32916668" />
       <window_info anchor="right" id="Gradle" visible="true" weight="0.18743344" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -1923,13 +1911,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="517">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
         </state>
       </provider>
     </entry>
@@ -2008,6 +1989,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/src/main/kotlin/io/pivotal/apptx/blangBoard/usecases/UseCase.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/application/src/main/kotlin/io/pivotal/apptx/blangBoard/Application.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -2018,10 +2006,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/src/main/kotlin/io/pivotal/apptx/blangBoard/usecases/UseCase.kt">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+        <state relative-caret-position="351">
+          <caret line="52" column="6" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
         </state>
       </provider>
     </entry>

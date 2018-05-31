@@ -52,3 +52,6 @@ hs_err_pid*
 build/
 **/out/
 .gradle
+
+.idea/gradle.xml
+*.iml
