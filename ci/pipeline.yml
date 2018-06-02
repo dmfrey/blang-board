@@ -1,0 +1,102 @@
+groups:
+ - name: all
+   jobs:
+     - test-develop
+     - push-develop
+     - test-master
+     - push-release
+
+ - name: develop
+   jobs:
+     - test-develop
+     - push-develop
+
+ - name: master
+   jobs:
+     - test-master
+     - push-release
+
+resource_types:
+
+resources:
+
+- name: src-develop
+  type: git
+  source:
+    uri: https://github.com/dmfrey/blang-board.git
+    branch: develop
+
+- name: src-master
+  type: git
+  source:
+    uri: https://github.com/dmfrey/blang-board.git
+    branch: master
+
+- name: development
+  type: cf
+  source:
+    api: https://api.run.pcfbeta.io
+    username: dfrey-ci
+    password: xkxa7ipg51XdYRR
+    organization: pivot-dfrey
+    space: development
+    skip_cert_check: true
+
+- name: release
+  type: cf
+  source:
+    api: https://api.run.pcfbeta.io
+    username: dfrey-ci
+    password: xkxa7ipg51XdYRR
+    organization: pivot-dfrey
+    space: release
+    skip_cert_check: true
+
+jobs:
+- name: test-develop
+  plan:
+  - aggregate:
+    - get: repo
+      resource: src-develop
+      trigger: true
+  - task: run java tests using gradle
+    file: tasks/java_test.yml
+
+- name: push-develop
+  plan:
+  - aggregate:
+    - get: repo
+      resource: src-develop
+      trigger: true
+      passed: [test-develop]
+  - task: deploy artifact with manifest to pcf
+    file: tasks/push.yml
+    params:
+      ENVIRONMENT: development
+  - put: development
+    params:
+      manifest: manifest_development.yml
+
+- name: test-master
+  plan:
+  - aggregate:
+    - get: repo
+      resource: src-master
+      trigger: true
+  - task: run java tests using gradle
+    file: tasks/java_test.yml
+
+- name: push-release
+  plan:
+  - aggregate:
+    - get: repo
+      resource: src-master
+      trigger: true
+      passed: [test-master]
+  - task: deploy artifact with manifest to pcf
+    file: tasks/push.yml
+    params:
+      ENVIRONMENT: release
+  - put: release
+    params:
+      manifest: manifest_release.yml
