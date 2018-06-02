@@ -60,7 +60,7 @@ jobs:
       resource: src-develop
       trigger: true
   - task: run java tests using gradle
-    file: tasks/java_test.yml
+    file: ci/tasks/java_test.yml
 
 - name: push-develop
   plan:
@@ -70,7 +70,7 @@ jobs:
       trigger: true
       passed: [test-develop]
   - task: deploy artifact with manifest to pcf
-    file: tasks/push.yml
+    file: ci/tasks/push.yml
     params:
       ENVIRONMENT: development
   - put: development
@@ -84,7 +84,7 @@ jobs:
       resource: src-master
       trigger: true
   - task: run java tests using gradle
-    file: tasks/java_test.yml
+    file: ci/tasks/java_test.yml
 
 - name: push-release
   plan:
@@ -94,7 +94,7 @@ jobs:
       trigger: true
       passed: [test-master]
   - task: deploy artifact with manifest to pcf
-    file: tasks/push.yml
+    file: ci/tasks/push.yml
     params:
       ENVIRONMENT: release
   - put: release
