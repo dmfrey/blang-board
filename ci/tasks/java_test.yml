@@ -5,5 +5,8 @@ image_resource:
   type: docker-image
   source: {repository: codequest/ruby-golang-java-nodejs}
 
+inputs:
+  - name: repo
+
 run:
-  path: scripts/java_test.sh
+  path: repo/ci/scripts/java_test.sh

@@ -12,4 +12,4 @@ outputs:
   - name: artifacts
 
 run:
-  path: scripts/push.sh
+  path: repo/ci/scripts/push.sh

@@ -75,7 +75,7 @@ jobs:
       ENVIRONMENT: development
   - put: development
     params:
-      manifest: manifest_development.yml
+      manifest: repo/ci/manifest_development.yml
 
 - name: test-master
   plan:
@@ -99,4 +99,4 @@ jobs:
       ENVIRONMENT: release
   - put: release
     params:
-      manifest: manifest_release.yml
+      manifest: repo/ci/manifest_release.yml
