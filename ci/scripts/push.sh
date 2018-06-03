@@ -9,6 +9,7 @@ set -e -u
 
 pushd repo
 
+export ROOT_FOLDER=$( pwd )
 . ci/scripts/generate-settings.sh
 
 ./gradlew :application:build
