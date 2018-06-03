@@ -18,3 +18,4 @@ pushd repo
 popd
 
 cp -R repo/application/build/libs/*-SNAPSHOT.jar artifacts/application.jar
+cp repo/ci/manifest_${ENVIRONMENT}.yml artifacts/
