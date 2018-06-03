@@ -9,6 +9,8 @@ set -e -u
 
 pushd repo
 
+. ci/scripts/generate-settings.sh
+
 ./gradlew :application:build
 
 popd
