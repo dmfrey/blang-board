@@ -7,5 +7,9 @@
 set -e -u
 
 pushd repo
+
 ./gradlew :application:build
+
 popd
+
+cp -R repo/application/build/libs/*-SNAPSHOT.jar artifacts/application.jar
