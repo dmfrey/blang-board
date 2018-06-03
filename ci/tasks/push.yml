@@ -9,8 +9,5 @@ inputs:
   - name: repo
   - name: artifacts
 
-outputs:
-  - name: artifacts
-
 run:
   path: repo/ci/scripts/push.sh
