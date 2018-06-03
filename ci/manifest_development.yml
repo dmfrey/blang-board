@@ -1,6 +1,7 @@
 ---
 applications:
 - name: blang-board
+  host: blang-board-development
   buildpack: java_buildpack_offline
   memory: 1024M
   instances: 1
