@@ -7,7 +7,6 @@ image_resource:
 
 inputs:
   - name: repo
-  - name: artifacts
 
 run:
   path: repo/ci/scripts/push.sh

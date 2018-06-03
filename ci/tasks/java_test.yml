@@ -8,8 +8,5 @@ image_resource:
 inputs:
   - name: repo
 
-outputs:
-  - name: artifacts
-
 run:
   path: repo/ci/scripts/java_test.sh
