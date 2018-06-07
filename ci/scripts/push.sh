@@ -13,9 +13,9 @@ pushd repo
 
 . ci/scripts/generate-settings.sh
 
-./gradlew :application:build
+./mvnw clean package
 
 popd
 
-cp -R repo/application/build/libs/*-SNAPSHOT.jar artifacts/application.jar
+cp -R repo/application/target/*-SNAPSHOT.jar artifacts/application.jar
 cp repo/ci/manifest_${ENVIRONMENT}.yml artifacts/

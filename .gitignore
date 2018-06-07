@@ -1,15 +1,21 @@
-# Created by .ignore support plugin (hsz.mobi)
-### Java template
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-### Kotlin template
-
-
-build/
 **/out/
+**/build/
+**/target/
+!.mvn/wrapper/maven-wrapper.jar
+!gradle/wrapper/gradle-wrapper.jar
 .gradle
 
-.idea/gradle.xml
-.idea/workspace.xml
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
 *.iml
+*.ipr
