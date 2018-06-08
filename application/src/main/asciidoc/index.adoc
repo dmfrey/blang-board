@@ -8,7 +8,21 @@ Blang Board Service API Documentation
 
 = Blang Board API
 
+A Ubiquitous Language Board.
+
+*Ubiquitous Language* is the term Eric Evans uses in _Domain Driven Design_ for the practice of building up a common, rigorous language between developers and users.
+
+It is not uncommon for multiple Teams to share the Terms across their respective contexts, but supply their own Definitions for those Terms.
+
+It is also not uncommon for similar Terms to be used differently for certain audiences. The Business Users and Technical team may share the Term _Database_, for example, but it has a very different meaning to each of these groups.
 
 == Project Group Actions
 include::projectGroups.adoc[]
 
+
+== Project Group Term Actions
+include::projectGroupTerms.adoc[]
+
+
+== Project Group Term Definition Actions
+include::projectGroupTermDefinitions.adoc[]

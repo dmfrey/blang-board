@@ -113,10 +113,9 @@
                 <configuration>
                     <sourceDocumentName>index.adoc</sourceDocumentName>
                     <backend>html5</backend>
-                    <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
+                    <outputDirectory>${project.build.outputDirectory}/static/api</outputDirectory>
                     <attributes>
                         <snippets>${project.build.directory}/generated-snippets</snippets>
-                        <!--<stylesheet>../css/ripsaw-docs.css</stylesheet>-->
                         <sectanchors>true</sectanchors>
                         <!-- set the idprefix to blank -->
                         <idprefix />

@@ -10,6 +10,9 @@ image_resource:
 inputs:
   - name: repo
 
+outputs:
+  -
+
 run:
   path: repo/ci/scripts/java_test.sh
 

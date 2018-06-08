@@ -1,0 +1,22 @@
+
+*Definition:* The meaning of a Term as it relates to a Team
+
+* There can be many Definitions across many Teams
+
+=== GET /api/projectGroups/{projectKey}/terms/{termUuid}/definitions
+
+
+=== POST /api/projectGroups/{projectKey}/terms/{termUuid}/definitions
+.Path Parameters
+include::{snippets}/create-term-definition/path-parameters.adoc[]
+
+.Request
+[source,bash]
+include::{snippets}/create-term-definition/curl-request.adoc[]
+
+[source,bash]
+include::{snippets}/create-term-definition/http-request.adoc[]
+
+.Success Responses
+[source,bash]
+include::{snippets}/create-term-definition/http-response.adoc[]

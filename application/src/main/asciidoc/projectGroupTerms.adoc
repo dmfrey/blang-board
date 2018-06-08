@@ -1,0 +1,20 @@
+
+*Term:* An item of intererest to Team(s) in a group of related projects
+
+=== GET /api/projectGroups/{projectKey}/terms
+
+
+=== POST /api/projectGroups/{projectKey}/terms
+.Path Parameters
+include::{snippets}/create-term/path-parameters.adoc[]
+
+.Request
+[source,bash]
+include::{snippets}/create-term/curl-request.adoc[]
+
+[source,bash]
+include::{snippets}/create-term/http-request.adoc[]
+
+.Success Responses
+[source,bash]
+include::{snippets}/create-term/http-response.adoc[]
