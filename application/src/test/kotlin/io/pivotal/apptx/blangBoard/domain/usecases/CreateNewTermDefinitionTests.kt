@@ -7,18 +7,18 @@ import io.pivotal.apptx.blangBoard.domain.Project
 import io.pivotal.apptx.blangBoard.domain.common.TimestampGenerator
 import io.pivotal.apptx.blangBoard.domain.common.UuidGenerator
 import io.pivotal.apptx.blangBoard.domain.persistence.ProjectRepository
-import io.pivotal.apptx.blangBoard.domain.usecases.requests.CreateTermRequest
-import io.pivotal.apptx.blangBoard.domain.usecases.responses.TermCreatedResponse
-import io.pivotal.apptx.blangBoard.domain.usecases.service.CreateNewTermService
+import io.pivotal.apptx.blangBoard.domain.usecases.requests.CreateTermDefinitionRequest
+import io.pivotal.apptx.blangBoard.domain.usecases.responses.TermDefinitionCreatedResponse
+import io.pivotal.apptx.blangBoard.domain.usecases.service.CreateNewTermDefinitionService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Test
 import java.time.Instant
 import java.util.*
 
-class CreateNewTermTests {
+class CreateNewTermDefinitionTests {
 
-    lateinit var subject: CreateNewTerm
+    lateinit var subject: CreateNewTermDefinition
 
     lateinit var mockProjectGroupRepository: ProjectRepository
     lateinit var mockUuidGenerator: UuidGenerator
@@ -31,31 +31,33 @@ class CreateNewTermTests {
         mockUuidGenerator = mock()
         mockTimestampGenerator = mock()
 
-        subject = CreateNewTermService( mockProjectGroupRepository, mockUuidGenerator, mockTimestampGenerator )
+        subject = CreateNewTermDefinitionService(mockProjectGroupRepository, mockUuidGenerator, mockTimestampGenerator)
 
     }
 
     @Test
-    fun itAddsTermToProjectGroupTerms() {
+    fun itAddsDefinitionToTerm() {
 
         val fakeProjectKey = "fake-project-key"
 
         val fakeTermUuid: UUID = UUID.randomUUID()
-        whenever( mockUuidGenerator.generate() ).thenReturn( fakeTermUuid )
+        val fakeTermDefinitionUuid: UUID = UUID.randomUUID()
+        whenever( mockUuidGenerator.generate() ).thenReturn( fakeTermDefinitionUuid )
 
         val fakeTimestamp: Instant = Instant.now()
         whenever( mockTimestampGenerator.generate() ).thenReturn( fakeTimestamp )
 
-        val fakeTerm = "fake-name"
+        val fakeTeamKey = "fake-team-key"
+        val fakeTermDefinition = "fake-name-definition"
 
         val fakeProject = Project( fakeProjectKey )
         whenever( mockProjectGroupRepository.findByProjectKey( fakeProjectKey ) ).thenReturn( fakeProject )
 
-        val fakeCreateTermRequest = CreateTermRequest( fakeProjectKey, fakeTerm )
-        val termCreatedResponse = subject.execute( fakeCreateTermRequest )
+        val fakeCreateTermDefinitionRequest = CreateTermDefinitionRequest( fakeProjectKey, fakeTermUuid, fakeTeamKey, fakeTermDefinition )
+        val termDefinitionCreatedResponse = subject.execute( fakeCreateTermDefinitionRequest )
 
-        val expectedTermCreatedResponse = TermCreatedResponse( fakeTermUuid, fakeTerm, fakeTimestamp, fakeProjectKey )
-        assertThat( termCreatedResponse ).isEqualTo( expectedTermCreatedResponse )
+        val expectedTermDefinitionCreatedResponse = TermDefinitionCreatedResponse( fakeTermDefinitionUuid, fakeTermDefinition, fakeTimestamp, fakeTermUuid, fakeProjectKey )
+        assertThat( termDefinitionCreatedResponse ).isEqualTo( expectedTermDefinitionCreatedResponse )
 
         verify( mockUuidGenerator ).generate()
         verify( mockTimestampGenerator ).generate()

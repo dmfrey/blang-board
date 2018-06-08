@@ -30,10 +30,9 @@ class ProjectTests {
 
         val fakeTermUuid = UUID.randomUUID()
         val fakeTermName = "fake-name"
-        val fakeTerm = Term( fakeTermUuid, fakeTermName )
 
         val fakeOccurredOn: Instant = Instant.now()
-        project.addTerm( fakeTerm, fakeOccurredOn )
+        project.addTerm( fakeTermUuid, fakeTermName, fakeOccurredOn )
 
         val expectedTermCreated = TermCreated( fakeTermUuid, fakeTermName, fakeOccurredOn, fakeProjectKey )
 

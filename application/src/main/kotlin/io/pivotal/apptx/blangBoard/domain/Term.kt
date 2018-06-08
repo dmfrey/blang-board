@@ -4,5 +4,6 @@ import java.util.*
 
 data class Term(
         var uuid: UUID,
-        var name: String
+        var name: String,
+        var definitions: MutableMap<UUID, Definition> = mutableMapOf()
 )

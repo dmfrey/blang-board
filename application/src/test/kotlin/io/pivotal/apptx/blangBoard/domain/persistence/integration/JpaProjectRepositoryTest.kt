@@ -58,12 +58,14 @@ class JpaProjectRepositoryTest() {
 
         val project  = subject.findByProjectKey( projectKey )
 
+        val expectedTerm = Term( termUuid, name )
+
         assertThat( project ).isNotNull
         assertThat( project.key ).isEqualTo( projectKey )
         assertThat( project.terms )
                 .hasSize( 1 )
                 .containsKey( termUuid )
-                .containsValue( name )
+                .containsValue( expectedTerm )
         assertThat( project.changes ).hasSize( 1 )
 
         verify( domainEventRepository ).findAllByProjectKey( projectKey )
@@ -101,7 +103,7 @@ class JpaProjectRepositoryTest() {
         val project = Project( projectKey )
 
         val occurredOn = Instant.now()
-        project.addTerm( Term( termUuid, name ), occurredOn )
+        project.addTerm( termUuid, name, occurredOn )
         subject.save( project )
 
         val expectedTermCreated = TermCreated( termUuid, name, occurredOn, projectKey )
@@ -131,7 +133,7 @@ class JpaProjectRepositoryTest() {
         val termUuid2 = UUID.randomUUID()
         val name2 = "fake-term-2"
         val occurredOn2 = Instant.now()
-        project.addTerm( Term( termUuid2, name2 ), occurredOn2 )
+        project.addTerm( termUuid2, name2, occurredOn2 )
         subject.save( project )
 
         val expectedTermCreated = TermCreated( termUuid2, name2, occurredOn2, projectKey )

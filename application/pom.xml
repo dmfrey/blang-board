@@ -55,6 +55,14 @@
             <scope>runtime</scope>
         </dependency>
 
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>org.springframework.restdocs</groupId>
+            <artifactId>spring-restdocs-mockmvc</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -87,6 +95,36 @@
                         <version>${kotlin.version}</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <version>1.5.6</version>
+                <executions>
+                    <execution>
+                        <id>generate-docs</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <sourceDocumentName>index.adoc</sourceDocumentName>
+                    <backend>html5</backend>
+                    <outputDirectory>${project.build.outputDirectory}/static</outputDirectory>
+                    <attributes>
+                        <snippets>${project.build.directory}/generated-snippets</snippets>
+                        <!--<stylesheet>../css/ripsaw-docs.css</stylesheet>-->
+                        <sectanchors>true</sectanchors>
+                        <!-- set the idprefix to blank -->
+                        <idprefix />
+                        <idseperator>-</idseperator>
+                        <project-version>${project.version}</project-version>
+                        <project-timestamp>${maven.build.timestamp}</project-timestamp>
+                    </attributes>
+                </configuration>
             </plugin>
 
         </plugins>

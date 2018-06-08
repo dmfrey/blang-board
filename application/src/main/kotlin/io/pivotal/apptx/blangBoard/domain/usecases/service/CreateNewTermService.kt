@@ -1,6 +1,5 @@
 package io.pivotal.apptx.blangBoard.domain.usecases.service
 
-import io.pivotal.apptx.blangBoard.domain.Term
 import io.pivotal.apptx.blangBoard.domain.common.TimestampGenerator
 import io.pivotal.apptx.blangBoard.domain.common.UuidGenerator
 import io.pivotal.apptx.blangBoard.domain.persistence.ProjectRepository
@@ -17,16 +16,16 @@ class CreateNewTermService constructor(
 
     override fun execute( createTermRequest: CreateTermRequest ): TermCreatedResponse {
 
-        val projectKey = createTermRequest.projectName.toLowerCase().replace( ' ', '-' )
+        val projectKey = createTermRequest.projectKey.toLowerCase().replace( ' ', '-' )
         val project = projectRepository.findByProjectKey( projectKey )
 
-        val term = Term( uuidGenerator.generate(), createTermRequest.term )
+        val termUuid = uuidGenerator.generate()
         val occurredOn = timestampGenerator.generate()
-        project.addTerm( term, occurredOn )
+        project.addTerm( termUuid, createTermRequest.term, occurredOn )
 
         projectRepository.save( project )
 
-        return TermCreatedResponse( term.uuid, term.name, occurredOn, project.key )
+        return TermCreatedResponse( termUuid, createTermRequest.term, occurredOn, project.key )
     }
 
 }

@@ -1,0 +1,34 @@
+
+== GET /api/projectGroups/{projectKey}
+
+
+== POST /api/projectGroups/{projectKey}/terms
+.Path Parameters
+include::{snippets}/create-term/path-parameters.adoc[]
+
+.Request
+[source,bash]
+include::{snippets}/create-term/curl-request.adoc[]
+
+[source,bash]
+include::{snippets}/create-term/http-request.adoc[]
+
+.Success Responses
+[source,bash]
+include::{snippets}/create-term/http-response.adoc[]
+
+
+== POST /api/projectGroups/{projectKey}/terms/{termUuid}/definitions
+.Path Parameters
+include::{snippets}/create-term-definition/path-parameters.adoc[]
+
+.Request
+[source,bash]
+include::{snippets}/create-term-definition/curl-request.adoc[]
+
+[source,bash]
+include::{snippets}/create-term-definition/http-request.adoc[]
+
+.Success Responses
+[source,bash]
+include::{snippets}/create-term-definition/http-response.adoc[]

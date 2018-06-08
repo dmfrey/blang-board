@@ -1,0 +1,14 @@
+:toc: left
+Blang Board Service API Documentation
+=====================================
+{project-timestamp}
+:revnumber: {project-version}
+:doctype: book
+
+
+= Blang Board API
+
+
+== Project Group Actions
+include::projectGroups.adoc[]
+
