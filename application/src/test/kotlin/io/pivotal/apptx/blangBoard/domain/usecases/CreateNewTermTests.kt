@@ -1,14 +1,14 @@
 package io.pivotal.apptx.blangBoard.domain.usecases
 
+import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import io.pivotal.apptx.blangBoard.domain.Project
+import io.pivotal.apptx.blangBoard.domain.Term
 import io.pivotal.apptx.blangBoard.domain.common.TimestampGenerator
 import io.pivotal.apptx.blangBoard.domain.common.UuidGenerator
 import io.pivotal.apptx.blangBoard.domain.persistence.ProjectRepository
-import io.pivotal.apptx.blangBoard.domain.usecases.requests.CreateTermRequest
-import io.pivotal.apptx.blangBoard.domain.usecases.responses.TermCreatedResponse
 import io.pivotal.apptx.blangBoard.domain.usecases.service.CreateNewTermService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -49,13 +49,12 @@ class CreateNewTermTests {
         val fakeTerm = "fake-name"
 
         val fakeProject = Project( fakeProjectKey )
-        whenever( mockProjectGroupRepository.findByProjectKey( fakeProjectKey ) ).thenReturn( fakeProject )
+        whenever( mockProjectGroupRepository.findByProjectKey( any() ) ).thenReturn( fakeProject )
 
-        val fakeCreateTermRequest = CreateTermRequest( fakeProjectKey, fakeTerm )
-        val termCreatedResponse = subject.execute( fakeCreateTermRequest )
+        val term = subject.execute( fakeProjectKey, fakeTerm )
 
-        val expectedTermCreatedResponse = TermCreatedResponse( fakeTermUuid, fakeTerm, fakeTimestamp, fakeProjectKey )
-        assertThat( termCreatedResponse ).isEqualTo( expectedTermCreatedResponse )
+        val expectedTerm = Term( fakeTermUuid, fakeTerm, fakeProjectKey )
+        assertThat( term ).isEqualTo( expectedTerm )
 
         verify( mockUuidGenerator ).generate()
         verify( mockTimestampGenerator ).generate()

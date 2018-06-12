@@ -2,7 +2,6 @@ package io.pivotal.apptx.blangBoard.domain.persistence.integration
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.pivotal.apptx.blangBoard.domain.Project
-import io.pivotal.apptx.blangBoard.domain.common.UuidGenerator
 import io.pivotal.apptx.blangBoard.domain.events.DomainEvent
 import io.pivotal.apptx.blangBoard.domain.persistence.ProjectRepository
 import io.pivotal.apptx.blangBoard.domain.persistence.integration.entities.DomainEventEntity
@@ -12,7 +11,7 @@ import java.sql.Timestamp
 
 @Component
 @Transactional( readOnly = true )
-class JpaProjectRepository constructor( var repository: DomainEventRepository, var uuidGenerator: UuidGenerator, var mapper: ObjectMapper ): ProjectRepository {
+class JpaProjectRepository constructor( var repository: DomainEventRepository, var mapper: ObjectMapper ): ProjectRepository {
 
     @Transactional
     override fun save( project: Project ) {

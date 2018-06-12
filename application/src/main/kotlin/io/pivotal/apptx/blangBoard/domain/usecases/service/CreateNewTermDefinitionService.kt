@@ -1,12 +1,12 @@
 package io.pivotal.apptx.blangBoard.domain.usecases.service
 
+import io.pivotal.apptx.blangBoard.domain.Definition
 import io.pivotal.apptx.blangBoard.domain.common.TimestampGenerator
 import io.pivotal.apptx.blangBoard.domain.common.UuidGenerator
 import io.pivotal.apptx.blangBoard.domain.persistence.ProjectRepository
 import io.pivotal.apptx.blangBoard.domain.usecases.CreateNewTermDefinition
-import io.pivotal.apptx.blangBoard.domain.usecases.requests.CreateTermDefinitionRequest
-import io.pivotal.apptx.blangBoard.domain.usecases.responses.TermDefinitionCreatedResponse
 import org.springframework.stereotype.Component
+import java.util.*
 
 @Component
 class CreateNewTermDefinitionService(
@@ -14,23 +14,23 @@ class CreateNewTermDefinitionService(
         var uuidGenerator: UuidGenerator,
         var timestampGenerator: TimestampGenerator ): CreateNewTermDefinition {
 
-    override fun execute( createTermDefinitionRequest: CreateTermDefinitionRequest ): TermDefinitionCreatedResponse {
+    override fun execute(projectKey: String, teamKey: String, termUuid: UUID, definition: String ): Definition {
 
-        val teamKey = createTermDefinitionRequest.teamKey.toLowerCase().replace( ' ', '-' )
-        val project = projectRepository.findByProjectKey( createTermDefinitionRequest.projectKey )
+        val teamKeyFormatted = teamKey.toLowerCase().replace( ' ', '-' )
+        val project = projectRepository.findByProjectKey( projectKey )
 
         val definitionUuid = uuidGenerator.generate()
         val occurredOn = timestampGenerator.generate()
         project.addTermDefinition(
                 definitionUuid,
-                createTermDefinitionRequest.definition,
-                teamKey,
-                createTermDefinitionRequest.termUuid,
+                definition,
+                teamKeyFormatted,
+                termUuid,
                 occurredOn )
 
         projectRepository.save( project )
 
-        return TermDefinitionCreatedResponse( definitionUuid, createTermDefinitionRequest.definition, occurredOn, createTermDefinitionRequest.termUuid, createTermDefinitionRequest.projectKey )
+        return Definition( definitionUuid, definition, termUuid, teamKeyFormatted, projectKey )
     }
 
 }

@@ -3,12 +3,11 @@ package io.pivotal.apptx.blangBoard.domain.usecases
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
+import io.pivotal.apptx.blangBoard.domain.Definition
 import io.pivotal.apptx.blangBoard.domain.Project
 import io.pivotal.apptx.blangBoard.domain.common.TimestampGenerator
 import io.pivotal.apptx.blangBoard.domain.common.UuidGenerator
 import io.pivotal.apptx.blangBoard.domain.persistence.ProjectRepository
-import io.pivotal.apptx.blangBoard.domain.usecases.requests.CreateTermDefinitionRequest
-import io.pivotal.apptx.blangBoard.domain.usecases.responses.TermDefinitionCreatedResponse
 import io.pivotal.apptx.blangBoard.domain.usecases.service.CreateNewTermDefinitionService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -31,7 +30,7 @@ class CreateNewTermDefinitionTests {
         mockUuidGenerator = mock()
         mockTimestampGenerator = mock()
 
-        subject = CreateNewTermDefinitionService(mockProjectGroupRepository, mockUuidGenerator, mockTimestampGenerator)
+        subject = CreateNewTermDefinitionService( mockProjectGroupRepository, mockUuidGenerator, mockTimestampGenerator )
 
     }
 
@@ -53,11 +52,10 @@ class CreateNewTermDefinitionTests {
         val fakeProject = Project( fakeProjectKey )
         whenever( mockProjectGroupRepository.findByProjectKey( fakeProjectKey ) ).thenReturn( fakeProject )
 
-        val fakeCreateTermDefinitionRequest = CreateTermDefinitionRequest( fakeProjectKey, fakeTermUuid, fakeTeamKey, fakeTermDefinition )
-        val termDefinitionCreatedResponse = subject.execute( fakeCreateTermDefinitionRequest )
+        val definition = subject.execute( fakeProjectKey, fakeTeamKey, fakeTermUuid, fakeTermDefinition )
 
-        val expectedTermDefinitionCreatedResponse = TermDefinitionCreatedResponse( fakeTermDefinitionUuid, fakeTermDefinition, fakeTimestamp, fakeTermUuid, fakeProjectKey )
-        assertThat( termDefinitionCreatedResponse ).isEqualTo( expectedTermDefinitionCreatedResponse )
+        val expectedDefinition = Definition( fakeTermDefinitionUuid, fakeTermDefinition, fakeTermUuid, fakeTeamKey, fakeProjectKey )
+        assertThat( definition ).isEqualTo( expectedDefinition )
 
         verify( mockUuidGenerator ).generate()
         verify( mockTimestampGenerator ).generate()

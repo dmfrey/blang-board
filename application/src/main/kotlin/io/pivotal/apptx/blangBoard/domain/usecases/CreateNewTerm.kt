@@ -1,10 +1,9 @@
 package io.pivotal.apptx.blangBoard.domain.usecases
 
-import io.pivotal.apptx.blangBoard.domain.usecases.requests.CreateTermRequest
-import io.pivotal.apptx.blangBoard.domain.usecases.responses.TermCreatedResponse
+import io.pivotal.apptx.blangBoard.domain.Term
 
 interface CreateNewTerm {
 
-    fun execute( createTermRequest: CreateTermRequest ): TermCreatedResponse
+    fun execute( projectKey: String, term: String ): Term
 
 }

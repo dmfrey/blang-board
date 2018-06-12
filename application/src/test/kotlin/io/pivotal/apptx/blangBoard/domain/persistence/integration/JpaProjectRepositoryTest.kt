@@ -8,7 +8,6 @@ import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.nhaarman.mockito_kotlin.*
 import io.pivotal.apptx.blangBoard.domain.Project
 import io.pivotal.apptx.blangBoard.domain.Term
-import io.pivotal.apptx.blangBoard.domain.common.UuidGenerator
 import io.pivotal.apptx.blangBoard.domain.events.TermCreated
 import io.pivotal.apptx.blangBoard.domain.persistence.integration.entities.DomainEventEntity
 import org.assertj.core.api.Assertions.assertThat
@@ -18,12 +17,11 @@ import java.sql.Timestamp
 import java.time.Instant
 import java.util.*
 
-class JpaProjectRepositoryTest() {
+class JpaProjectRepositoryTest {
 
     lateinit var subject: JpaProjectRepository
 
     lateinit var domainEventRepository: DomainEventRepository
-    lateinit var uuidGenerator: UuidGenerator
 
     var mapper = jacksonObjectMapper()
 
@@ -37,9 +35,8 @@ class JpaProjectRepositoryTest() {
         mapper.configure( SerializationFeature.WRITE_DURATIONS_AS_TIMESTAMPS, false )
 
         domainEventRepository = mock()
-        uuidGenerator = mock()
 
-        subject = JpaProjectRepository( domainEventRepository, uuidGenerator, mapper )
+        subject = JpaProjectRepository( domainEventRepository, mapper )
 
     }
 
@@ -58,7 +55,7 @@ class JpaProjectRepositoryTest() {
 
         val project  = subject.findByProjectKey( projectKey )
 
-        val expectedTerm = Term( termUuid, name )
+        val expectedTerm = Term( termUuid, name, projectKey )
 
         assertThat( project ).isNotNull
         assertThat( project.key ).isEqualTo( projectKey )

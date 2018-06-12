@@ -1,7 +1,6 @@
 package io.pivotal.apptx.blangBoard.endpoint
 
 import io.pivotal.apptx.blangBoard.domain.usecases.CreateNewTermDefinition
-import io.pivotal.apptx.blangBoard.domain.usecases.requests.CreateTermDefinitionRequest
 import io.pivotal.apptx.blangBoard.endpoint.model.NewTermDefinitionRequestModel
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PathVariable
@@ -13,7 +12,7 @@ import java.util.*
 import javax.validation.Valid
 
 @RestController
-class ApiProjectGroupTermDefinitionsCommandController constructor(var createNewTermDefinition: CreateNewTermDefinition ) {
+class ApiProjectGroupTermDefinitionsCommandController constructor( var createNewTermDefinition: CreateNewTermDefinition ) {
 
     @PostMapping( "/api/projectGroups/{projectGroup}/terms/{termUuid}/definitions" )
     fun createNewTermDefinition(
@@ -22,10 +21,10 @@ class ApiProjectGroupTermDefinitionsCommandController constructor(var createNewT
             @Valid @RequestBody newTermDefinitionRequest : NewTermDefinitionRequestModel,
             uriComponentsBuilder: UriComponentsBuilder ): ResponseEntity<Void> {
 
-        val termDefinitionCreatedResponse = createNewTermDefinition.execute( CreateTermDefinitionRequest( projectGroup, termUuid, newTermDefinitionRequest.teamKey, newTermDefinitionRequest.definition ) )
+        val definition = createNewTermDefinition.execute( projectGroup, newTermDefinitionRequest.teamKey, termUuid, newTermDefinitionRequest.definition )
 
         return ResponseEntity
-                .created( uriComponentsBuilder.path( "/api/projectGroups/{projectKey}/terms/{termUuid}" ).buildAndExpand( termDefinitionCreatedResponse.projectKey, termDefinitionCreatedResponse.termUuid ).toUri() )
+                .created( uriComponentsBuilder.path( "/api/projectGroups/{projectKey}/terms/{termUuid}/definitions/{definitionUuid}" ).buildAndExpand( definition.projectKey, definition.termUuid, definition.definitionUuid ).toUri() )
                 .build()
     }
 

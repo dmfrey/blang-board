@@ -24,7 +24,7 @@ class Project( val key: String ) {
 
     private fun termCreated( termCreated: TermCreated ) : Project {
 
-        _terms[ termCreated.termUuid ] = Term( termCreated.termUuid, termCreated.name )
+        _terms[ termCreated.termUuid ] = Term( termCreated.termUuid, termCreated.name, key )
         _changes[ termCreated.termUuid ] =  termCreated
 
         return this
@@ -41,8 +41,9 @@ class Project( val key: String ) {
         _definition[ termDefinitionCreated.termDefinitionUuid ] = Definition(
                 termDefinitionCreated.termDefinitionUuid,
                 termDefinitionCreated.definition,
+                termDefinitionCreated.termUuid,
                 termDefinitionCreated.teamKey,
-                termDefinitionCreated.termUuid
+                key
         )
         _changes[ termDefinitionCreated.termDefinitionUuid ] =  termDefinitionCreated
 
@@ -57,6 +58,19 @@ class Project( val key: String ) {
             is TermCreated -> termCreated( domainEvent )
             is TermDefinitionCreated -> termDefinitionCreated( domainEvent )
         }
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is Project) return false
+
+        if (key != other.key) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return key.hashCode()
     }
 
     companion object {

@@ -2,8 +2,8 @@ package io.pivotal.apptx.blangBoard.endpoint
 
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
+import io.pivotal.apptx.blangBoard.domain.Term
 import io.pivotal.apptx.blangBoard.domain.usecases.CreateNewTerm
-import io.pivotal.apptx.blangBoard.domain.usecases.responses.TermCreatedResponse
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,8 +23,8 @@ import org.springframework.restdocs.request.RequestDocumentation.pathParameters
 import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers.print
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.header
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-import java.time.Instant
 import java.util.*
 
 @RunWith( SpringRunner::class )
@@ -44,8 +44,8 @@ class ApiProjectGroupTermsCommandControllerTests {
         val projectKey = "fake-project-key"
         val termUuid = UUID.randomUUID()
 
-        val termCreatedResponse = TermCreatedResponse( termUuid, "fake-term", Instant.now(), projectKey )
-        whenever( mockCreateNewTerm.execute( any() ) ).thenReturn( termCreatedResponse )
+        val term = Term( termUuid, "fake-term", projectKey )
+        whenever( mockCreateNewTerm.execute( any(), any() ) ).thenReturn( term )
 
         val requestBody = "{\"name\": \"new name\"}"
 
@@ -53,10 +53,10 @@ class ApiProjectGroupTermsCommandControllerTests {
                 RestDocumentationRequestBuilders.post( "/api/projectGroups/{projectKey}/terms", projectKey )
                         .contentType( MediaType.APPLICATION_JSON )
                         .content( requestBody )
-                        .header( HttpHeaders.LOCATION, "/api/projectGroups/${termCreatedResponse.projectKey}/terms/${termCreatedResponse.termUuid}" )
                 )
                 .andDo( print() )
                 .andExpect( status().is2xxSuccessful )
+                .andExpect( header().string( HttpHeaders.LOCATION, "https://blang-board/api/projectGroups/$projectKey/terms/$termUuid" ) )
                 .andDo(
                         document("create-term",
                             preprocessResponse( prettyPrint() ),
