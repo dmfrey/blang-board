@@ -2,6 +2,19 @@
 *Term:* An item of intererest to Team(s) in a group of related projects
 
 === GET /api/projectGroups/{projectKey}/terms
+.Path Parameters
+include::{snippets}/get-project-group-terms/path-parameters.adoc[]
+
+.Request
+[source,bash]
+include::{snippets}/get-project-group-terms/curl-request.adoc[]
+
+[source,bash]
+include::{snippets}/get-project-group-terms/http-request.adoc[]
+
+.Success Responses
+[source,bash]
+include::{snippets}/get-project-group-terms/http-response.adoc[]
 
 
 === POST /api/projectGroups/{projectKey}/terms

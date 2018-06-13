@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component
 
 @Component
 class LookupProjectGroupService constructor(
-        var projectRepository: ProjectRepository ): LookupProjectGroup {
+        val projectRepository: ProjectRepository ): LookupProjectGroup {
 
     override fun execute( projectKey: String ): Project {
 

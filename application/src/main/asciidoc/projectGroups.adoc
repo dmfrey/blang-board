@@ -3,6 +3,19 @@
 Terms can be shared across the Teams and each Team can establish their own definition(s) for the Terms.
 
 === GET /api/projectGroups/{projectKey}
+.Path Parameters
+include::{snippets}/get-project-group/path-parameters.adoc[]
+
+.Request
+[source,bash]
+include::{snippets}/get-project-group/curl-request.adoc[]
+
+[source,bash]
+include::{snippets}/get-project-group/http-request.adoc[]
+
+.Success Responses
+[source,bash]
+include::{snippets}/get-project-group/http-response.adoc[]
 
 
 === POST /api/projectGroups/{projectKey}
