@@ -5,7 +5,6 @@ import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
 import io.pivotal.apptx.blangBoard.domain.Project
-import io.pivotal.apptx.blangBoard.domain.Term
 import io.pivotal.apptx.blangBoard.domain.common.TimestampGenerator
 import io.pivotal.apptx.blangBoard.domain.common.UuidGenerator
 import io.pivotal.apptx.blangBoard.domain.persistence.ProjectRepository
@@ -53,8 +52,7 @@ class CreateNewTermTests {
 
         val term = subject.execute( fakeProjectKey, fakeTerm )
 
-        val expectedTerm = Term( fakeTermUuid, fakeTerm, fakeProjectKey )
-        assertThat( term ).isEqualTo( expectedTerm )
+        assertThat( term ).isEqualTo( fakeTermUuid )
 
         verify( mockUuidGenerator ).generate()
         verify( mockTimestampGenerator ).generate()

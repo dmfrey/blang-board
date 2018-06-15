@@ -13,9 +13,9 @@ import org.springframework.web.util.UriComponentsBuilder
 @RestController
 class ApiProjectGroupTermsQueryController constructor( var lookupProjectGroupTerms: LookupProjectGroupTerms ) {
 
-    @GetMapping( "/api/projectGroups/{projectGroup}/terms" )
+    @GetMapping( "/api/projectGroups/{projectKey}/terms" )
     fun lookupProjectGroupTerms(
-            @PathVariable( "projectGroup" ) projectGroup: String,
+            @PathVariable( "projectKey" ) projectGroup: String,
             uriComponentsBuilder: UriComponentsBuilder ): ResponseEntity<TermsResource> {
 
         val termsResource = TermsResource.createFrom( lookupProjectGroupTerms.execute( projectGroup ) )
@@ -23,6 +23,12 @@ class ApiProjectGroupTermsQueryController constructor( var lookupProjectGroupTer
                 .add(
                         linkTo( methodOn( ApiProjectGroupTermsQueryController::class.java ).lookupProjectGroupTerms( projectGroup, uriComponentsBuilder ) )
                                 .withSelfRel()
+                )
+        termsResource
+                .add(
+                        linkTo( ApiProjectGroupTermsQueryController::class.java ).slash( "api" ).slash( "projectGroups" ).slash( projectGroup ).slash( "terms" ).slash( ":termUuid" ).slash( "definitions" )
+                                .withRel( "definitions" )
+                                .withTitle( "definitions" )
                 )
         termsResource
                 .add(

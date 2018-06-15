@@ -13,10 +13,12 @@ import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDoc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.context.annotation.Import
+import org.springframework.restdocs.hypermedia.HypermediaDocumentation.*
 import org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders
 import org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse
 import org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint
+import org.springframework.restdocs.payload.PayloadDocumentation.*
 import org.springframework.restdocs.request.RequestDocumentation.parameterWithName
 import org.springframework.restdocs.request.RequestDocumentation.pathParameters
 import org.springframework.test.context.junit4.SpringRunner
@@ -47,7 +49,7 @@ class ApiProjectGroupQueryControllerTests {
         val project = generateProject( projectKey )
         whenever( mockLookupProjectGroup.execute( any() ) ).thenReturn( project )
 
-        val content = "{\"projectGroup\":\"fake-project-key\",\"_links\":{\"self\":{\"href\":\"https://blang-board/api/projectGroups/fake-project-key\"},\"terms\":{\"href\":\"https://blang-board/api/projectGroups/fake-project-key/terms\",\"title\":\"terms\"}}}"
+        val content = "{\"projectKey\":\"fake-project-key\",\"_links\":{\"self\":{\"href\":\"https://blang-board/api/projectGroups/fake-project-key\"},\"terms\":{\"href\":\"https://blang-board/api/projectGroups/fake-project-key/terms\",\"title\":\"terms\"}}}"
 
         mvc.perform( RestDocumentationRequestBuilders.get( "/api/projectGroups/{projectKey}", projectKey ) )
                 .andDo( print() )
@@ -59,6 +61,14 @@ class ApiProjectGroupQueryControllerTests {
                                 preprocessResponse( prettyPrint() ),
                                 pathParameters(
                                         parameterWithName( "projectKey" ).description( "Key that identifies a group of projects" )
+                                ),
+                                responseFields(
+                                        fieldWithPath( "projectKey" ).description("The Terms" ),
+                                        subsectionWithPath("_links").description("The Hypermedia Links" )
+                                ),
+                                links( halLinks(),
+                                        linkWithRel( "self" ).description("Link to self." ),
+                                        linkWithRel( "terms" ).description("Link to terms resources." )
                                 )
                         )
                 )

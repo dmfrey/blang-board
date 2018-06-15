@@ -44,8 +44,7 @@ class ApiProjectGroupTermsCommandControllerTests {
         val projectKey = "fake-project-key"
         val termUuid = UUID.randomUUID()
 
-        val term = Term( termUuid, "fake-term", projectKey )
-        whenever( mockCreateNewTerm.execute( any(), any() ) ).thenReturn( term )
+        whenever( mockCreateNewTerm.execute( any(), any() ) ).thenReturn( termUuid )
 
         val requestBody = "{\"name\": \"new name\"}"
 

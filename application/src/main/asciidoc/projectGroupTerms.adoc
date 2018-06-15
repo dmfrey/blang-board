@@ -16,6 +16,14 @@ include::{snippets}/get-project-group-terms/http-request.adoc[]
 [source,bash]
 include::{snippets}/get-project-group-terms/http-response.adoc[]
 
+.Response Fields
+[source,bash]
+include::{snippets}/get-project-group-terms/response-fields.adoc[]
+
+.Links
+[source,bash]
+include::{snippets}/get-project-group-terms/links.adoc[]
+
 
 === POST /api/projectGroups/{projectKey}/terms
 .Path Parameters

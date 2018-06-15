@@ -11,8 +11,6 @@ class Project( val key: String ) {
     private val _terms: MutableMap<UUID, Term> = mutableMapOf()
     val terms: Map<UUID, Term> = _terms
 
-    private val _definition: MutableMap<UUID, Definition> = mutableMapOf()
-
     private val _changes: MutableMap<UUID, DomainEvent> = mutableMapOf()
     val changes: Map<UUID, DomainEvent> = _changes
 
@@ -24,7 +22,7 @@ class Project( val key: String ) {
 
     private fun termCreated( termCreated: TermCreated ) : Project {
 
-        _terms[ termCreated.termUuid ] = Term( termCreated.termUuid, termCreated.name, key )
+        _terms[ termCreated.termUuid ] = Term( termCreated.name )
         _changes[ termCreated.termUuid ] =  termCreated
 
         return this
@@ -38,13 +36,14 @@ class Project( val key: String ) {
 
     private fun termDefinitionCreated( termDefinitionCreated: TermDefinitionCreated) : Project {
 
-        _definition[ termDefinitionCreated.termDefinitionUuid ] = Definition(
-                termDefinitionCreated.termDefinitionUuid,
-                termDefinitionCreated.definition,
-                termDefinitionCreated.termUuid,
-                termDefinitionCreated.teamKey,
-                key
-        )
+        _terms[ termDefinitionCreated.termUuid ]
+                ?.addDefinition(
+                        termDefinitionCreated.termDefinitionUuid,
+                        Definition(
+                            termDefinitionCreated.definition,
+                            termDefinitionCreated.teamKey
+                        )
+                )
         _changes[ termDefinitionCreated.termDefinitionUuid ] =  termDefinitionCreated
 
         return this

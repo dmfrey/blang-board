@@ -4,6 +4,7 @@ import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
+import io.pivotal.apptx.blangBoard.domain.Definition
 import io.pivotal.apptx.blangBoard.domain.Project
 import io.pivotal.apptx.blangBoard.domain.Term
 import io.pivotal.apptx.blangBoard.domain.persistence.ProjectRepository
@@ -19,6 +20,15 @@ class LookupProjectGroupTermsTests {
     lateinit var subject: LookupProjectGroupTerms
 
     lateinit var mockProjectGroupRepository: ProjectRepository
+
+    val termUuid = UUID.fromString( "59eed85e-acce-49df-bef9-ccc45621bdfc" )
+    val termName = "fake-term"
+    val termOccurredOn = Instant.parse( "2018-06-12T20:15:00.000Z" )
+
+    val definitionUuid = UUID.fromString( "0d711d7c-bdc5-4fe7-9aa2-7dc8eac002ce" )
+    val definition = "fake-term-definition"
+    val definitionTeamKey = "fake-team-key"
+    val definitionOccurredOn = Instant.parse( "2018-06-12T20:15:00.000Z" )
 
     @Before
     fun setup() {
@@ -39,10 +49,10 @@ class LookupProjectGroupTermsTests {
 
         val terms = subject.execute( fakeProjectKey )
 
-        val termUuid = UUID.fromString( "59eed85e-acce-49df-bef9-ccc45621bdfc" )
-        val expectedTerm = Term( termUuid, "fake-term", fakeProjectKey )
+        val expectedTerm = Term( termName )
+        expectedTerm.addDefinition( definitionUuid, Definition( definition, definitionTeamKey ))
 
-        val expectedTerms = listOf( expectedTerm )
+        val expectedTerms = mapOf( termUuid to expectedTerm )
         assertThat( terms ).isEqualTo( expectedTerms )
 
         verify( mockProjectGroupRepository ).findByProjectKey( fakeProjectKey )
@@ -53,13 +63,9 @@ class LookupProjectGroupTermsTests {
 
         val project = Project( projectKey )
 
-        val termUuid = UUID.fromString( "59eed85e-acce-49df-bef9-ccc45621bdfc" )
-        val termOccurredOn = Instant.parse( "2018-06-12T20:15:00.000Z" )
-        project.addTerm( termUuid, "fake-term", termOccurredOn )
+        project.addTerm( termUuid, termName, termOccurredOn )
 
-        val definitionUuid = UUID.fromString( "0d711d7c-bdc5-4fe7-9aa2-7dc8eac002ce" )
-        val definitionOccurredOn = Instant.parse( "2018-06-12T20:15:00.000Z" )
-        project.addTermDefinition( definitionUuid, "fake-term-definition", "fake-team-key", termUuid, definitionOccurredOn )
+        project.addTermDefinition( definitionUuid, definition, definitionTeamKey, termUuid, definitionOccurredOn )
 
         return project
     }

@@ -1,11 +1,11 @@
 package io.pivotal.apptx.blangBoard.domain.usecases.service
 
-import io.pivotal.apptx.blangBoard.domain.Term
 import io.pivotal.apptx.blangBoard.domain.common.TimestampGenerator
 import io.pivotal.apptx.blangBoard.domain.common.UuidGenerator
 import io.pivotal.apptx.blangBoard.domain.persistence.ProjectRepository
 import io.pivotal.apptx.blangBoard.domain.usecases.CreateNewTerm
 import org.springframework.stereotype.Component
+import java.util.*
 
 @Component
 class CreateNewTermService constructor(
@@ -13,7 +13,7 @@ class CreateNewTermService constructor(
         var uuidGenerator: UuidGenerator,
         var timestampGenerator: TimestampGenerator ): CreateNewTerm {
 
-    override fun execute( projectKey: String, term: String ): Term {
+    override fun execute( projectKey: String, term: String ): UUID {
 
         val projectKeyFormatted = projectKey.toLowerCase().replace( ' ', '-' )
         val project = projectRepository.findByProjectKey( projectKeyFormatted )
@@ -24,7 +24,7 @@ class CreateNewTermService constructor(
 
         projectRepository.save( project )
 
-        return Term( termUuid, term, project.key )
+        return termUuid
     }
 
 }

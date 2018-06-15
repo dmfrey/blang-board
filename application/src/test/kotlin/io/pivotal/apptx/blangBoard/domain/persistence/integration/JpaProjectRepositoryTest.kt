@@ -53,9 +53,9 @@ class JpaProjectRepositoryTest {
         val fakeDomainEventEntity = DomainEventEntity( termUuid.toString(), Timestamp.from( occurredOn ), mapper.writeValueAsString( termCreated ), projectKey )
         whenever( domainEventRepository.findAllByProjectKey( any() ) ).thenReturn( listOf( fakeDomainEventEntity ) )
 
-        val project  = subject.findByProjectKey( projectKey )
+        val project= subject.findByProjectKey( projectKey )
 
-        val expectedTerm = Term( termUuid, name, projectKey )
+        val expectedTerm = Term( name )
 
         assertThat( project ).isNotNull
         assertThat( project.key ).isEqualTo( projectKey )

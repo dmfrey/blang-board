@@ -2,7 +2,6 @@ package io.pivotal.apptx.blangBoard.endpoint
 
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
-import io.pivotal.apptx.blangBoard.domain.Definition
 import io.pivotal.apptx.blangBoard.domain.usecases.CreateNewTermDefinition
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -42,12 +41,10 @@ class ApiProjectGroupTermDefinitionsCommandControllerTests {
     fun aNewTermDefinitionIsRecordedForATeamInAProjectGroup() {
 
         val projectKey = "fake-project-key"
-        val teamKey = "fake-team-key"
         val termUuid = UUID.randomUUID()
         val termDefinitionUuid = UUID.randomUUID()
 
-        val definition = Definition( termDefinitionUuid, "fake-term-definition", termUuid, teamKey, projectKey )
-        whenever( mockCreateNewTermDefinition.execute( any(), any(), any(), any() ) ).thenReturn( definition )
+        whenever( mockCreateNewTermDefinition.execute( any(), any(), any(), any() ) ).thenReturn( termDefinitionUuid )
 
         val requestBody = "{\"teamKey\": \"team-key\", \"definition\": \"a fake definition for a fake term\"}"
 
@@ -58,7 +55,7 @@ class ApiProjectGroupTermDefinitionsCommandControllerTests {
         )
                 .andDo( print() )
                 .andExpect( status().is2xxSuccessful )
-                .andExpect( header().string( HttpHeaders.LOCATION, "https://blang-board/api/projectGroups/${definition.projectKey}/terms/${definition.termUuid}/definitions/${definition.definitionUuid}" ) )
+                .andExpect( header().string( HttpHeaders.LOCATION, "https://blang-board/api/projectGroups/$projectKey/terms/$termUuid/definitions/$termDefinitionUuid" ) )
                 .andDo(
                         document("create-term-definition",
                                 preprocessResponse( prettyPrint() ),

@@ -1,6 +1,5 @@
 package io.pivotal.apptx.blangBoard.domain.usecases.service
 
-import io.pivotal.apptx.blangBoard.domain.Definition
 import io.pivotal.apptx.blangBoard.domain.common.TimestampGenerator
 import io.pivotal.apptx.blangBoard.domain.common.UuidGenerator
 import io.pivotal.apptx.blangBoard.domain.persistence.ProjectRepository
@@ -14,7 +13,7 @@ class CreateNewTermDefinitionService(
         var uuidGenerator: UuidGenerator,
         var timestampGenerator: TimestampGenerator ): CreateNewTermDefinition {
 
-    override fun execute(projectKey: String, teamKey: String, termUuid: UUID, definition: String ): Definition {
+    override fun execute(projectKey: String, teamKey: String, termUuid: UUID, definition: String ): UUID {
 
         val teamKeyFormatted = teamKey.toLowerCase().replace( ' ', '-' )
         val project = projectRepository.findByProjectKey( projectKey )
@@ -30,7 +29,7 @@ class CreateNewTermDefinitionService(
 
         projectRepository.save( project )
 
-        return Definition( definitionUuid, definition, termUuid, teamKeyFormatted, projectKey )
+        return definitionUuid
     }
 
 }

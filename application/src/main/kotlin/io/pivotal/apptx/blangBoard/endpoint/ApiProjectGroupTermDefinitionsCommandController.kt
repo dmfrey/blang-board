@@ -14,17 +14,17 @@ import javax.validation.Valid
 @RestController
 class ApiProjectGroupTermDefinitionsCommandController constructor( var createNewTermDefinition: CreateNewTermDefinition ) {
 
-    @PostMapping( "/api/projectGroups/{projectGroup}/terms/{termUuid}/definitions" )
+    @PostMapping( "/api/projectGroups/{projectKey}/terms/{termUuid}/definitions" )
     fun createNewTermDefinition(
-            @PathVariable( "projectGroup" ) projectGroup: String,
+            @PathVariable( "projectKey" ) projectKey: String,
             @PathVariable( "termUuid" ) termUuid: UUID,
             @Valid @RequestBody newTermDefinitionRequest : NewTermDefinitionRequestModel,
             uriComponentsBuilder: UriComponentsBuilder ): ResponseEntity<Void> {
 
-        val definition = createNewTermDefinition.execute( projectGroup, newTermDefinitionRequest.teamKey, termUuid, newTermDefinitionRequest.definition )
+        val definitionUuid = createNewTermDefinition.execute( projectKey, newTermDefinitionRequest.teamKey, termUuid, newTermDefinitionRequest.definition )
 
         return ResponseEntity
-                .created( uriComponentsBuilder.path( "/api/projectGroups/{projectKey}/terms/{termUuid}/definitions/{definitionUuid}" ).buildAndExpand( definition.projectKey, definition.termUuid, definition.definitionUuid ).toUri() )
+                .created( uriComponentsBuilder.path( "/api/projectGroups/{projectKey}/terms/{termUuid}/definitions/{definitionUuid}" ).buildAndExpand( projectKey, termUuid, definitionUuid ).toUri() )
                 .build()
     }
 

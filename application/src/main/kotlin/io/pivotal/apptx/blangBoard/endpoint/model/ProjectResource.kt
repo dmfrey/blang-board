@@ -4,7 +4,7 @@ import io.pivotal.apptx.blangBoard.domain.Project
 import org.springframework.hateoas.ResourceSupport
 
 data class ProjectResource(
-        var projectGroup: String
+        var projectKey: String
 ): ResourceSupport() {
 
     companion object {

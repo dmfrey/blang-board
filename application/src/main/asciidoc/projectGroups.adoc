@@ -17,5 +17,13 @@ include::{snippets}/get-project-group/http-request.adoc[]
 [source,bash]
 include::{snippets}/get-project-group/http-response.adoc[]
 
+.Response Fields
+[source,bash]
+include::{snippets}/get-project-group/response-fields.adoc[]
+
+.Links
+[source,bash]
+include::{snippets}/get-project-group/links.adoc[]
+
 
 === POST /api/projectGroups/{projectKey}

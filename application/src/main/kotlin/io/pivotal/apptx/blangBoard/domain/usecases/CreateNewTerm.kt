@@ -1,9 +1,9 @@
 package io.pivotal.apptx.blangBoard.domain.usecases
 
-import io.pivotal.apptx.blangBoard.domain.Term
+import java.util.*
 
 interface CreateNewTerm {
 
-    fun execute( projectKey: String, term: String ): Term
+    fun execute( projectKey: String, term: String ): UUID
 
 }

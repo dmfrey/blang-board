@@ -13,16 +13,16 @@ import javax.validation.Valid
 @RestController
 class ApiProjectGroupTermsCommandController constructor( var createNewTerm: CreateNewTerm ) {
 
-    @PostMapping( "/api/projectGroups/{projectGroup}/terms" )
+    @PostMapping( "/api/projectGroups/{projectKey}/terms" )
     fun createNewTerm(
-            @PathVariable( "projectGroup" ) projectGroup: String,
+            @PathVariable( "projectKey" ) projectKey: String,
             @Valid @RequestBody newTermRequest : NewTermRequestModel,
             uriComponentsBuilder: UriComponentsBuilder ): ResponseEntity<Void> {
 
-        val term = createNewTerm.execute( projectGroup, newTermRequest.name )
+        val termUuid = createNewTerm.execute( projectKey, newTermRequest.name )
 
         return ResponseEntity
-                .created( uriComponentsBuilder.path( "/api/projectGroups/{projectKey}/terms/{termUuid}" ).buildAndExpand( term.projectKey, term.termUuid ).toUri() )
+                .created( uriComponentsBuilder.path( "/api/projectGroups/{projectKey}/terms/{termUuid}" ).buildAndExpand( projectKey, termUuid ).toUri() )
                 .build()
     }
 

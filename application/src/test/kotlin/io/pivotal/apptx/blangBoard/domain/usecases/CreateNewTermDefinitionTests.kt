@@ -3,7 +3,6 @@ package io.pivotal.apptx.blangBoard.domain.usecases
 import com.nhaarman.mockito_kotlin.mock
 import com.nhaarman.mockito_kotlin.verify
 import com.nhaarman.mockito_kotlin.whenever
-import io.pivotal.apptx.blangBoard.domain.Definition
 import io.pivotal.apptx.blangBoard.domain.Project
 import io.pivotal.apptx.blangBoard.domain.common.TimestampGenerator
 import io.pivotal.apptx.blangBoard.domain.common.UuidGenerator
@@ -54,8 +53,7 @@ class CreateNewTermDefinitionTests {
 
         val definition = subject.execute( fakeProjectKey, fakeTeamKey, fakeTermUuid, fakeTermDefinition )
 
-        val expectedDefinition = Definition( fakeTermDefinitionUuid, fakeTermDefinition, fakeTermUuid, fakeTeamKey, fakeProjectKey )
-        assertThat( definition ).isEqualTo( expectedDefinition )
+        assertThat( definition ).isEqualTo( fakeTermDefinitionUuid )
 
         verify( mockUuidGenerator ).generate()
         verify( mockTimestampGenerator ).generate()
